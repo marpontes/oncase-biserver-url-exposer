@@ -33,12 +33,6 @@ public class URLExposer implements BeanFactoryPostProcessor {
 		FilterSecurityInterceptor customInterceptor = getCustomInterceptor();
 		initProxy();
 		updateProxy(customInterceptor);
-		
-		String token = PentahoSystem.get(String.class, "jcrPreAuthenticationToken", PentahoSessionHolder.getSession());
-		System.out.println("########## PRE-AUTH-TOKEN ##########\n\n");
-		System.out.println(token);
-		System.out.println("\n\n########## PRE-AUTH-TOKEN ##########");
-		
 
 	}
 	
