@@ -1,5 +1,7 @@
 # What is it?
 
+> **NOTE:** this branch works with Pentaho 7.X.X;
+
 This project delivers a bean that helps you to easily expose some Pentaho BI Server urls to non-authenticated users.
 
 Actually, exposing some URLs to anonymous requests, is not such a hard task to do.
@@ -20,7 +22,7 @@ This way, no matter how many plugins are trying to inject their rules, all of th
 
 # Building your jar
 
-This repo is an Eclipse project. 
+This repo is an Eclipse project.
 
 TODO: list dependencies and create resolve task.
 
@@ -31,22 +33,19 @@ First off, add the libs to your plugin the way you prefer.
 To expose an api that your plugin delivers, for example, you simple need to define into your plugin.spring.xml, for example:
 
 ```xml
-    <bean class="oncas.biserver.security.helper.URLExposer">
-      <property name="filterChainUrlPattern" value="/content/tapa/resources/templates/*/assets/**" />
-      <property name="interceptorDefifnintion">
-        <value>
-          <![CDATA[
-CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
-\A/content/tapa/resources/templates/([\w\-\_]+)/assets/.*\Z=Anonymous,Authenticated
-\A/.*\Z=Authenticated]]>
-        </value>
-      </property>
-    </bean>
+<bean class="oncase.biserver.security.helper.URLExposer">
+  <property name="securityMetadataSource">
+   <sec:filter-security-metadata-source request-matcher="ciRegex" use-expressions="false">
+     <sec:intercept-url pattern="\A/content/<PLUGIN>/resources/.*\Z" access="Anonymous,Authenticated" />
+     <sec:intercept-url pattern="\A/.*\Z" access="Authenticated" />
+   </sec:filter-security-metadata-source>
+ </property>
+</bean>
 ```
 
-In this case, we're exposing all the content from `/content/tapa/resources/templates/*/assets/**` meaning that this single `*` is any folder name and this double `**` translates to anything. Then our example URL:
+In this case, we're exposing all the content from `/content/<PLUGIN>/resources/*` meaning that this single `*` is any folder name and this double `**` translates to anything. Then our example URL:
 ```
-http://my-server:8080/pentaho/content/tapa/resources/templates/MYTEMPLATE/assets/js/angularjs.js
+http://my-server:8080/pentaho/content/tapa/resources/angularjs.js
 ```
 
 Would match and be public.
@@ -54,4 +53,3 @@ Would match and be public.
 # Contributions
 
 If somebody sees any improvement opportunity, please feel free to suggest and contribute.
-
