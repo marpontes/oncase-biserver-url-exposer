@@ -22,5 +22,9 @@
 	<classpathentry kind="lib" path="lib/spring-tx-4.3.2.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/spring-web-4.3.2.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/spring-webmvc-4.3.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-platform-build-utils-7.0.0.0-25.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-platform-extensions-7.0.0.0-25.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-platform-repository-7.0.0.0-25.jar"/>
+	<classpathentry kind="lib" path="lib/pentaho-platform-scheduler-7.0.0.0-25.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>
